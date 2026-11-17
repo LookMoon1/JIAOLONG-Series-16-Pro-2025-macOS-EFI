@@ -1,0 +1,222 @@
+{
+  "_comment": "此文件是 Kernel > Add 的完整条目清单，仅供使用者参考。仓库 config.plist 中该数组为空（纯配置版）。放入 kext 后按此顺序与字段添加。",
+  "count": 27,
+  "entries": [
+    {
+      "index": 0,
+      "BundlePath": "Lilu.kext",
+      "ExecutablePath": "Contents/MacOS/Lilu",
+      "PlistPath": "Contents/Info.plist",
+      "Enabled": true,
+      "Comment": ""
+    },
+    {
+      "index": 1,
+      "BundlePath": "VoodooHDA_BL.kext",
+      "ExecutablePath": "Contents/MacOS/VoodooHDA_BL",
+      "PlistPath": "Contents/Info.plist",
+      "Enabled": true,
+      "Comment": "VoodooHDA 3.7.1 BL analog audio for Tahoe (AZAL 1022:15e3)"
+    },
+    {
+      "index": 2,
+      "BundlePath": "YYavicWiFi.kext",
+      "ExecutablePath": "Contents/MacOS/YYavicWiFi",
+      "PlistPath": "Contents/Info.plist",
+      "Enabled": true,
+      "Comment": "YYavicWiFi (MT7922 native Wi-Fi)"
+    },
+    {
+      "index": 3,
+      "BundlePath": "AMFIPass.kext",
+      "ExecutablePath": "Contents/MacOS/AMFIPass",
+      "PlistPath": "Contents/Info.plist",
+      "Enabled": true,
+      "Comment": ""
+    },
+    {
+      "index": 4,
+      "BundlePath": "AppleMCEReporterDisabler.kext",
+      "ExecutablePath": "",
+      "PlistPath": "Contents/Info.plist",
+      "Enabled": true,
+      "Comment": ""
+    },
+    {
+      "index": 5,
+      "BundlePath": "BlueToolFixup.kext",
+      "ExecutablePath": "Contents/MacOS/BlueToolFixup",
+      "PlistPath": "Contents/Info.plist",
+      "Enabled": true,
+      "Comment": ""
+    },
+    {
+      "index": 6,
+      "BundlePath": "BrightnessKeys.kext",
+      "ExecutablePath": "Contents/MacOS/BrightnessKeys",
+      "PlistPath": "Contents/Info.plist",
+      "Enabled": true,
+      "Comment": ""
+    },
+    {
+      "index": 7,
+      "BundlePath": "ECEnabler.kext",
+      "ExecutablePath": "Contents/MacOS/ECEnabler",
+      "PlistPath": "Contents/Info.plist",
+      "Enabled": true,
+      "Comment": ""
+    },
+    {
+      "index": 8,
+      "BundlePath": "NVMeFix.kext",
+      "ExecutablePath": "Contents/MacOS/NVMeFix",
+      "PlistPath": "Contents/Info.plist",
+      "Enabled": true,
+      "Comment": ""
+    },
+    {
+      "index": 9,
+      "BundlePath": "RestrictEvents.kext",
+      "ExecutablePath": "Contents/MacOS/RestrictEvents",
+      "PlistPath": "Contents/Info.plist",
+      "Enabled": true,
+      "Comment": ""
+    },
+    {
+      "index": 10,
+      "BundlePath": "VirtualSMC.kext",
+      "ExecutablePath": "Contents/MacOS/VirtualSMC",
+      "PlistPath": "Contents/Info.plist",
+      "Enabled": true,
+      "Comment": ""
+    },
+    {
+      "index": 11,
+      "BundlePath": "SMCBatteryManager.kext",
+      "ExecutablePath": "Contents/MacOS/SMCBatteryManager",
+      "PlistPath": "Contents/Info.plist",
+      "Enabled": true,
+      "Comment": ""
+    },
+    {
+      "index": 12,
+      "BundlePath": "SMCLightSensor.kext",
+      "ExecutablePath": "Contents/MacOS/SMCLightSensor",
+      "PlistPath": "Contents/Info.plist",
+      "Enabled": true,
+      "Comment": ""
+    },
+    {
+      "index": 13,
+      "BundlePath": "SimpleMtkBtFw.kext",
+      "ExecutablePath": "Contents/MacOS/SimpleMtkBtFw",
+      "PlistPath": "Contents/Info.plist",
+      "Enabled": true,
+      "Comment": ""
+    },
+    {
+      "index": 14,
+      "BundlePath": "USBToolBox.kext",
+      "ExecutablePath": "Contents/MacOS/USBToolBox",
+      "PlistPath": "Contents/Info.plist",
+      "Enabled": true,
+      "Comment": ""
+    },
+    {
+      "index": 15,
+      "BundlePath": "UTBDefault.kext",
+      "ExecutablePath": "",
+      "PlistPath": "Contents/Info.plist",
+      "Enabled": true,
+      "Comment": ""
+    },
+    {
+      "index": 16,
+      "BundlePath": "VoodooI2C.kext/Contents/PlugIns/VoodooI2CServices.kext",
+      "ExecutablePath": "Contents/MacOS/VoodooI2CServices",
+      "PlistPath": "Contents/Info.plist",
+      "Enabled": true,
+      "Comment": ""
+    },
+    {
+      "index": 17,
+      "BundlePath": "VoodooI2C.kext/Contents/PlugIns/VoodooGPIO.kext",
+      "ExecutablePath": "Contents/MacOS/VoodooGPIO",
+      "PlistPath": "Contents/Info.plist",
+      "Enabled": true,
+      "Comment": ""
+    },
+    {
+      "index": 18,
+      "BundlePath": "VoodooI2C.kext",
+      "ExecutablePath": "Contents/MacOS/VoodooI2C",
+      "PlistPath": "Contents/Info.plist",
+      "Enabled": true,
+      "Comment": ""
+    },
+    {
+      "index": 19,
+      "BundlePath": "VoodooI2C.kext/Contents/PlugIns/VoodooInput.kext",
+      "ExecutablePath": "Contents/MacOS/VoodooInput",
+      "PlistPath": "Contents/Info.plist",
+      "Enabled": true,
+      "Comment": ""
+    },
+    {
+      "index": 20,
+      "BundlePath": "VoodooI2CHID.kext",
+      "ExecutablePath": "Contents/MacOS/VoodooI2CHID",
+      "PlistPath": "Contents/Info.plist",
+      "Enabled": true,
+      "Comment": ""
+    },
+    {
+      "index": 21,
+      "BundlePath": "VoodooPS2Controller.kext",
+      "ExecutablePath": "Contents/MacOS/VoodooPS2Controller",
+      "PlistPath": "Contents/Info.plist",
+      "Enabled": true,
+      "Comment": ""
+    },
+    {
+      "index": 22,
+      "BundlePath": "VoodooPS2Controller.kext/Contents/PlugIns/VoodooInput.kext",
+      "ExecutablePath": "Contents/MacOS/VoodooInput",
+      "PlistPath": "Contents/Info.plist",
+      "Enabled": false,
+      "Comment": ""
+    },
+    {
+      "index": 23,
+      "BundlePath": "VoodooPS2Controller.kext/Contents/PlugIns/VoodooPS2Keyboard.kext",
+      "ExecutablePath": "Contents/MacOS/VoodooPS2Keyboard",
+      "PlistPath": "Contents/Info.plist",
+      "Enabled": true,
+      "Comment": ""
+    },
+    {
+      "index": 24,
+      "BundlePath": "VoodooPS2Controller.kext/Contents/PlugIns/VoodooPS2Mouse.kext",
+      "ExecutablePath": "Contents/MacOS/VoodooPS2Mouse",
+      "PlistPath": "Contents/Info.plist",
+      "Enabled": true,
+      "Comment": ""
+    },
+    {
+      "index": 25,
+      "BundlePath": "VoodooPS2Controller.kext/Contents/PlugIns/VoodooPS2Trackpad.kext",
+      "ExecutablePath": "Contents/MacOS/VoodooPS2Trackpad",
+      "PlistPath": "Contents/Info.plist",
+      "Enabled": true,
+      "Comment": ""
+    },
+    {
+      "index": 26,
+      "BundlePath": "WhateverGreen.kext",
+      "ExecutablePath": "Contents/MacOS/WhateverGreen",
+      "PlistPath": "Contents/Info.plist",
+      "Enabled": true,
+      "Comment": ""
+    }
+  ]
+}

@@ -9,31 +9,46 @@
 > NullMoth 驱动是 PolyForm 非商业许可 —— 打包分发风险大、收益小，
 > 而这些都是上游现成且持续更新的。
 
-本 EFI 需要 **18 个 kext**（含 6 个 PlugIns）。
+本 EFI 需要 **19 个 kext**（含 6 个 PlugIns）。
 
 ## 主 Kext（`Kernel → Add` 顺序即加载顺序）
+
+> **完整条目定义**（含 `ExecutablePath` / `PlistPath` / `Enabled`）已导出为
+> [kernel-add-reference.json](kernel-add-reference.json)，可直接参考。
+> 仓库里 `config.plist` 的 `Kernel → Add` 是**空数组**（纯配置版）。
 
 | # | 名称 | 版本 | Bundle ID | 作用 | 下载来源 | 许可证 |
 |---|---|---|---|---|---|---|
 | 1 | `Lilu.kext` | 1.7.3 | `as.vit9696.Lilu` | 补丁内核框架，多数 kext 的依赖 | [acidanthera/Lilu](https://github.com/acidanthera/Lilu/releases) | BSD-3-Clause |
-| 2 | `YYavicWiFi.kext` | 0.8.0 | `com.yyavic.WiFi` | **MT7922 原生 Wi-Fi** | [yusufcanyavic/YYavicWiFi](https://github.com/yusufcanyavic/YYavicWiFi/releases) | **GPL-3.0-or-later** |
-| 3 | `AMFIPass.kext` | 1.4.1 | `com.dhinakg.AMFIPass` | 在 AMFI 开启状态下放行第三方 kext | [dhinakg/AMFIPass](https://github.com/dhinakg/AMFIPass/releases) | BSD-3-Clause |
-| 4 | `AppleMCEReporterDisabler.kext` | 1.2 | `org.xlnc.disabler.MCEReporter` | 禁用 `AppleMCEReporter`，防 AMD 平台 panic | [acidanthera/bugtracker](https://github.com/acidanthera/bugtracker) | BSD-3-Clause |
-| 5 | `BlueToolFixup.kext` | 2.7.3 | `as.acidanthera.BlueToolFixup` | 修复非 Broadcom 蓝牙在 macOS 12+ 的加载 | [acidanthera/BrcmPatchRAM](https://github.com/acidanthera/BrcmPatchRAM/releases) | BSD-3-Clause |
-| 6 | `BrightnessKeys.kext` | 1.0.4 | `as.acidanthera.BrightnessKeys` | Fn 亮度键映射（⚠️ **本机 Fn 键无效，此 kext 实际未起作用**，但保留无害） | [acidanthera/BrightnessKeys](https://github.com/acidanthera/BrightnessKeys/releases) | BSD-3-Clause |
-| 7 | `ECEnabler.kext` | 1.0.6 | `com.1Revenger1.ECEnabler` | 支持读取超 8 位的 EC 字段 | [1Revenger1/ECEnabler](https://github.com/1Revenger1/ECEnabler/releases) | MIT |
-| 8 | `NVMeFix.kext` | 1.1.4 | `org.acidanthera.NVMeFix` | NVMe 电源管理与兼容性修复 | [acidanthera/NVMeFix](https://github.com/acidanthera/NVMeFix/releases) | BSD-3-Clause |
-| 9 | `RestrictEvents.kext` | 1.1.7 | `as.vit9696.RestrictEvents` | 屏蔽不兼容提示、配合 `revpatch=sbvmm` | [acidanthera/RestrictEvents](https://github.com/acidanthera/RestrictEvents/releases) | BSD-3-Clause |
-| 10 | `VirtualSMC.kext` | 1.3.9 | `as.vit9696.VirtualSMC` | **必需**，模拟 SMC 芯片 | [acidanthera/VirtualSMC](https://github.com/acidanthera/VirtualSMC/releases) | BSD-3-Clause |
-| 11 | `SMCBatteryManager.kext` | 1.3.9 | `ru.usrsse2.SMCBatteryManager` | 电池信息（本机受 EC 隐藏影响，无百分比） | VirtualSMC 包内插件 | BSD-3-Clause |
-| 12 | `SMCLightSensor.kext` | 1.3.9 | `ru.usrsse2.SMCLightSensor` | 环境光传感器 | VirtualSMC 包内插件 | BSD-3-Clause |
-| 13 | `SimpleMtkBtFw.kext` | 1.0.0 | `com.laobamac.SimpleMtkBtFw` | MediaTek 蓝牙固件加载（**实测可配对连接**，可用性未验证） | [laobamac/SimpleMtkWlan](https://github.com/laobamac/SimpleMtkWlan) | GPL-2.0 |
-| 14 | `USBToolBox.kext` | 1.2.0 | `com.dhinakg.USBToolBox.kext` | USB 端口映射框架 | [USBToolBox/kext](https://github.com/USBToolBox/kext/releases) | BSD-3-Clause |
-| 15 | `UTBDefault.kext` | 1.0 | `com.dhinakg.USBToolBox.injector` | USB 默认端口注入 | USBToolBox 包内 | BSD-3-Clause |
-| 16 | `VoodooI2C.kext` | 2.9.1 | `com.alexandred.VoodooI2C` | **触控板**（I2C HID） | [VoodooI2C](https://github.com/VoodooI2C/VoodooI2C/releases) | GPL-2.0 |
-| 17 | `VoodooI2CHID.kext` | 1 | `com.alexandred.VoodooI2CHID` | I2C HID 设备支持 | VoodooI2C 包内 | GPL-2.0 |
-| 18 | `VoodooPS2Controller.kext` | 2.3.8 | `as.acidanthera.voodoo.driver.PS2Controller` | **内建键盘**（PS/2） | [acidanthera/VoodooPS2](https://github.com/acidanthera/VoodooPS2/releases) | GPL-2.0 |
-| 19 | `WhateverGreen.kext` | 1.7.2 | `as.vit9696.WhateverGreen` | 显卡补丁框架 | [acidanthera/WhateverGreen](https://github.com/acidanthera/WhateverGreen/releases) | BSD-3-Clause |
+| 2 | `VoodooHDA_BL.kext` | 3.7.1 | `org.voodoo.driver.VoodooHDA` | **内置声卡**（macOS 26 唯一可行方案，见 [docs/08](08-内置声卡修复.md)） | [CloverHackyColor/VoodooHDA](https://github.com/CloverHackyColor/VoodooHDA) | GPL-2.0 |
+| 3 | `YYavicWiFi.kext` | 0.8.0 | `com.yyavic.WiFi` | **MT7922 原生 Wi-Fi** | [yusufcanyavic/YYavicWiFi](https://github.com/yusufcanyavic/YYavicWiFi/releases) | **GPL-3.0-or-later** |
+| 4 | `AMFIPass.kext` | 1.4.1 | `com.dhinakg.AMFIPass` | 在 AMFI 开启状态下放行第三方 kext | [dhinakg/AMFIPass](https://github.com/dhinakg/AMFIPass/releases) | BSD-3-Clause |
+| 5 | `AppleMCEReporterDisabler.kext` | 1.2 | `org.xlnc.disabler.MCEReporter` | 禁用 `AppleMCEReporter`，防 AMD 平台 panic | [acidanthera/bugtracker](https://github.com/acidanthera/bugtracker) | BSD-3-Clause |
+| 6 | `BlueToolFixup.kext` | 2.7.3 | `as.acidanthera.BlueToolFixup` | 修复非 Broadcom 蓝牙在 macOS 12+ 的加载 | [acidanthera/BrcmPatchRAM](https://github.com/acidanthera/BrcmPatchRAM/releases) | BSD-3-Clause |
+| 7 | `BrightnessKeys.kext` | 1.0.4 | `as.acidanthera.BrightnessKeys` | Fn 亮度键映射（⚠️ **本机 Fn 键无效，此 kext 实际未起作用**，但保留无害） | [acidanthera/BrightnessKeys](https://github.com/acidanthera/BrightnessKeys/releases) | BSD-3-Clause |
+| 8 | `ECEnabler.kext` | 1.0.6 | `com.1Revenger1.ECEnabler` | 支持读取超 8 位的 EC 字段 | [1Revenger1/ECEnabler](https://github.com/1Revenger1/ECEnabler/releases) | MIT |
+| 9 | `NVMeFix.kext` | 1.1.4 | `org.acidanthera.NVMeFix` | NVMe 电源管理与兼容性修复 | [acidanthera/NVMeFix](https://github.com/acidanthera/NVMeFix/releases) | BSD-3-Clause |
+| 10 | `RestrictEvents.kext` | 1.1.7 | `as.vit9696.RestrictEvents` | 屏蔽不兼容提示、配合 `revpatch=sbvmm` | [acidanthera/RestrictEvents](https://github.com/acidanthera/RestrictEvents/releases) | BSD-3-Clause |
+| 11 | `VirtualSMC.kext` | 1.3.9 | `as.vit9696.VirtualSMC` | **必需**，模拟 SMC 芯片 | [acidanthera/VirtualSMC](https://github.com/acidanthera/VirtualSMC/releases) | BSD-3-Clause |
+| 12 | `SMCBatteryManager.kext` | 1.3.9 | `ru.usrsse2.SMCBatteryManager` | 电池信息（本机受 EC 隐藏影响，无百分比） | VirtualSMC 包内插件 | BSD-3-Clause |
+| 13 | `SMCLightSensor.kext` | 1.3.9 | `ru.usrsse2.SMCLightSensor` | 环境光传感器 | VirtualSMC 包内插件 | BSD-3-Clause |
+| 14 | `SimpleMtkBtFw.kext` | 1.0.0 | `com.laobamac.SimpleMtkBtFw` | MediaTek 蓝牙固件加载（**实测可配对连接**，可用性未验证） | [laobamac/SimpleMtkWlan](https://github.com/laobamac/SimpleMtkWlan) | GPL-2.0 |
+| 15 | `USBToolBox.kext` | 1.2.0 | `com.dhinakg.USBToolBox.kext` | USB 端口映射框架 | [USBToolBox/kext](https://github.com/USBToolBox/kext/releases) | BSD-3-Clause |
+| 16 | `UTBDefault.kext` | 1.0 | `com.dhinakg.USBToolBox.injector` | USB 默认端口注入 | USBToolBox 包内 | BSD-3-Clause |
+| 17 | `VoodooI2C.kext` | 2.9.1 | `com.alexandred.VoodooI2C` | **触控板**（I2C HID） | [VoodooI2C](https://github.com/VoodooI2C/VoodooI2C/releases) | GPL-2.0 |
+| 18 | `VoodooI2CHID.kext` | 1 | `com.alexandred.VoodooI2CHID` | I2C HID 设备支持 | VoodooI2C 包内 | GPL-2.0 |
+| 19 | `VoodooPS2Controller.kext` | 2.3.8 | `as.acidanthera.voodoo.driver.PS2Controller` | **内建键盘**（PS/2） | [acidanthera/VoodooPS2](https://github.com/acidanthera/VoodooPS2/releases) | GPL-2.0 |
+| 20 | `WhateverGreen.kext` | 1.7.2 | `as.vit9696.WhateverGreen` | 显卡补丁框架 | [acidanthera/WhateverGreen](https://github.com/acidanthera/WhateverGreen/releases) | BSD-3-Clause |
+
+> ### 🔊 关于 `VoodooHDA_BL.kext` 的两个关键点
+>
+> **1. 必须用 BL 版**。稳定版 3.6.8 依赖外部 `IOAudioFamily`，从 Big Sur 起
+> 直接 EFI 注入会报 `Invalid Parameter`。BL 版内嵌了 IOAudioFamily。
+>
+> **2. 必须改 `IONameMatch`**。原值 `"HDAS"` 改为 `["AZAL", "pci1022,15e3"]`，
+> 只匹配本机声卡，不碰 NVIDIA HDMI 声卡。**不改则驱动不会加载。**
+>
+> 完整说明见 [docs/08-内置声卡修复.md](08-内置声卡修复.md)。
 
 > **关于 NullMoth NVIDIA 驱动**：`NVRM` / `NVAccel` / `NVRMFB` 等**不在这张表里**，
 > 因为它们不是 OpenCore 注入的 kext，而是装进 `/Library/Extensions` 的系统级驱动。
@@ -97,9 +112,18 @@
 | `ResetNvramEntry.efi` | OpenCorePkg `Drivers/` | 菜单里提供 Reset NVRAM 项（强烈建议） |
 
 > 本机 `Misc → Boot → PickerMode` 已设为 **`Builtin`**（纯文本菜单），
-> 因为仓库不含 `Resources/` 主题资源。若你想要图形菜单：
-> 从 OpenCorePkg 复制 `Resources/` 到 `EFI/OC/Resources/`，
-> 并把 `PickerMode` 改成 `External`。
+> 因为仓库不含 `Resources/` 主题资源。
+>
+> ⚠️ **重要**：如果你从本机 U 盘复制 `config.plist` 过来，它的 `PickerMode` 是
+> `External`（因为 U 盘上有 `Resources/`）。**直接拿去用在没有 Resources 的 EFI 上，
+> OpenCore 开机菜单会失败**（黑屏或直接跳到默认项）。
+>
+> 两种解决办法：
+> - 保持 `Builtin`（简单，纯文本菜单）
+> - 或从 OpenCorePkg 复制 `Resources/` 到 `EFI/OC/Resources/`，并用 `External`
+>
+> 想要图形菜单：从 [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg/releases) 的
+> `X64/EFI/OC/Resources/` 复制整个目录过来，再把 `PickerMode` 改成 `External`。
 
 ---
 

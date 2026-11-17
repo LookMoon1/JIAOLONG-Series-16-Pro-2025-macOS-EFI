@@ -91,6 +91,59 @@ nvrmacpibl=1                             ← 内屏亮度
 - 不要用它去适配**其它** macOS build（如 26.8）而没有实测
 - 任何涉及系统更新的操作，**先提醒用户备份 EFI**
 
+### 🔴 R7 — 不要动 `LauncherOption`，它会破坏 BIOS 启动优先级
+
+本机已通过 **BIOS `Hard Drive BBS Priorities`** 实现内置硬盘引导 OpenCore（无需 U 盘）。
+
+| 位置 | 设置 | 必须保持 |
+|---|---|---|
+| 两份 config（U 盘 + 内置） | `Misc → Boot → LauncherOption` | **`Disabled`** |
+
+**原因**：`LauncherOption = Full` 会让 OpenCore 每次启动都**重写 BootOrder**，
+把 BIOS 里手工设好的优先级挤掉，导致又变回直接进 Windows。
+
+另外：
+
+- ❌ **不要**再用 UEFI Shell 的 `bcfg` 加启动项 —— **本机固件不认**
+- ❌ **不要**在 OC 自带 OpenShell 里改启动变量 —— 会被 `RequestBootVarRouting` 重定向（假写入）
+- ✅ 正确做法是改 **BIOS → Boot → Hard Drive BBS Priorities**
+- ⚠️ 顶层 Boot 类别列表里**看不到 OpenCore 是正常的**，只在 BBS 子菜单里出现
+
+完整说明见 [docs/07-内置EFI引导修复.md](docs/07-内置EFI引导修复.md)。
+
+### 🔴 R8 — macOS 26 上不要再用 AppleALC 修声卡
+
+**苹果从 macOS 26 Tahoe 起删除了 `AppleHDA.kext`**，而 `AppleALC` 依赖它。
+
+- ❌ 不要尝试 `AppleALC + alcid=15` → **在 Tahoe 上根本不会工作**
+- ❌ 不要试各种 `layout-id` → 同上
+- ❌ 不要把网上 macOS 15 时代的教程套用过来
+- ✅ 本机的正解是 **`VoodooHDA_BL.kext`（3.7.1 BL 版）**
+
+`VoodooHDA_BL` 的两个必要条件：
+
+1. **必须是 BL 版**（内嵌 `IOAudioFamily`）；稳定版 3.6.8 在 EFI 注入会报 `Invalid Parameter`
+2. **必须改 `IONameMatch`**：`"HDAS"` → `["AZAL", "pci1022,15e3"]`，否则驱动不加载
+
+完整说明见 [docs/08-内置声卡修复.md](docs/08-内置声卡修复.md)。
+
+### 🔴 R9 — Fn 键会导致系统重启（已知未修复）
+
+| 操作 | 结果 |
+|---|---|
+| 单独按 **Fn** | ❌ 无反应 |
+| **Fn + F 功能区按键** | 🔴 **整机重启** |
+| 单独按 F1–F12 | ✅ 正常 |
+
+**这是已复现的真实缺陷，不是配置错误。** 遇到"Fn 键不好用"的反馈时：
+
+- ❌ **不要**去删 `BrightnessKeys.kext`（无害，删了滑块也不会好）
+- ❌ **不要**在无备份情况下改 `SSDT-EC` 的 EC query 映射
+- ❌ **不要**声称"Fn 键已修复"或"亮度 Fn 键可用"——**当前不可用**
+- ✅ 正确说法：亮度**滑块**可用，Fn 键不可用且组合键会重启
+
+详见 [docs/02-关键配置与踩坑.md](docs/02-关键配置与踩坑.md) 第四节之二。
+
 ---
 
 ## 四、改 config.plist 的固定流程

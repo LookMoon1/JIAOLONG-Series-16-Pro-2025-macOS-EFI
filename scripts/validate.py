@@ -28,6 +28,9 @@ EXPECTED = {
     ("PlatformInfo", "UpdateSMBIOSMode"): "Custom",
     ("Kernel", "Quirks", "CustomSMBIOSGuid"): True,
     ("Misc", "Security", "SecureBootModel"): "Disabled",
+    # 内置硬盘引导依赖：LauncherOption 必须 Disabled，否则 OC 会重写 BootOrder
+    ("Misc", "Boot", "LauncherOption"): "Disabled",
+    ("UEFI", "Quirks", "RequestBootVarRouting"): True,
 }
 
 # boot-args 中必须存在的关键参数

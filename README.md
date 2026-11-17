@@ -35,17 +35,19 @@
 
 | 功能 | 状态 | 说明 |
 |---|---|---|
+| **内置硬盘引导** | ✅ | **无需 U 盘**，已改 BIOS `Hard Drive BBS Priorities`（见 docs/07） |
 | 系统启动 | ✅ | macOS 26.7.3 (25G342)，正常进桌面 |
 | 显卡 / Metal | ✅ | RTX 5060 Laptop 8 GB，NullMoth 驱动，内屏正常点亮 |
 | 内建键盘 | ✅ | PS/2，VoodooPS2Controller |
 | 触控板 | ✅ | I2C HID，VoodooI2C + `-vi2c-force-polling` |
 | **Wi-Fi** | ✅ | **MT7922 原生驱动，YYavicWiFi 0.8.0 + `-yyavicnoverify`** |
+| **内置声卡** | ✅ | **VoodooHDA 3.7.1 BL 版**；扬声器 / 耳机孔 / 麦克风均可用（见 docs/08） |
 | 亮度调节 | ✅ | `nvrmacpibl=1`，**控制中心滑块可用** |
 | **Fn 键** | 🔴 | **单独按无反应；Fn + F 功能区按键会导致系统重启。未修复，见上方警告** |
 | USB | ✅ | USBToolBox + UTBDefault |
+| Windows 双启动 | ✅ | OC 菜单自动列出 Windows Boot Manager |
 | 睡眠 / 唤醒 | ⚠️ | 未系统验证 |
 | 蓝牙 | ⚠️ | 可正确连接设备，但未验证可用性 |
-| 内置声卡 | ❌ | 未尝试修复 |
 | 有线网口 | ❌ | Motorcomm YT6801，无 macOS 驱动 |
 | 电池百分比 | ❌ | SSDT-EC 隐藏了真实 EC |
 
