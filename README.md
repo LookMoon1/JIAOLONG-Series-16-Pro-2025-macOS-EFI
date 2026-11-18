@@ -117,6 +117,19 @@
 
 这些值是这个 EFI 能跑起来的原因，**改动前请先读 [docs/02-关键配置与踩坑.md](docs/02-关键配置与踩坑.md)**。
 
+> ### 📌 EFI 固化（脱离 U 盘使用）
+>
+> 默认从 U 盘引导。要让**内置硬盘直接启动 OpenCore**（即"EFI 固化"，不再依赖 U 盘）：
+>
+> 1. 开机进 BIOS（**F2** / Del）
+> 2. `Boot` → `UEFI Hard Disk Drive BBS Priorities`
+> 3. 把 `Boot Option #1` 改为 **OpenCore**
+> 4. **F10** 保存退出
+>
+> 同时确认两份 config 的 `Misc → Boot → LauncherOption` = **`Disabled`**（防止 OC 重写 BootOrder）。
+>
+> 详细排障见 [docs/07-内置EFI引导修复.md](docs/07-内置EFI引导修复.md)。
+
 | 配置 | 值 | 为什么 |
 |---|---|---|
 | `UEFI → Quirks → ExitBootServicesDelay` | **3000** | 突破 AMD 平台 PCI configuration 卡死，**最关键的一条**（见下方说明） |
