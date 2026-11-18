@@ -154,7 +154,7 @@
 | GPL-2.0 | `VoodooI2C*`、`VoodooPS2*`、`SimpleMtkBtFw` | 同上 |
 | BSD-3-Clause | OpenCore、Lilu、VirtualSMC、WhateverGreen、RestrictEvents、NVMeFix、BrightnessKeys、BlueToolFixup、AMFIPass、USBToolBox | 保留版权声明 |
 | MIT | `ECEnabler` | 保留版权声明 |
-| **PolyForm Noncommercial** | NullMoth NVIDIA 驱动（装进 `/Library/Extensions`，不进 EFI） | **仅限非商业个人使用** |
+| PolyForm Noncommercial | NullMoth NVIDIA 驱动（装进 `/Library/Extensions`，不进 EFI） | **仅限非商业个人使用** |
 
 ### 关于 `JiaoLongEC.kext`
 

@@ -19,7 +19,7 @@ macOS 装在内置盘后，开机**总是直接进 Windows**，无法从内置 E
 UEFI 固件的 Boot 列表顶层是**设备类别**（`usb key` / `hard disk` / `network` …），
 而 `hard disk` 类别**内部**先加载哪个 EFI 程序，由子菜单决定：
 
-```
+```text
 BIOS → Boot → Hard Drive BBS Priorities
                 （或 UEFI Hard Disk Drive BBS Priorities）
 ```
@@ -87,7 +87,7 @@ BIOS → Boot → Hard Drive BBS Priorities
 
 想恢复"内置直接进 Windows"：
 
-```
+```text
 BIOS → Hard Drive BBS Priorities → Boot Option #1 改回 Windows Boot Manager → F10
 ```
 

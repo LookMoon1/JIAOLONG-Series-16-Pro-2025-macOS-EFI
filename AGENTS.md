@@ -28,6 +28,7 @@ MUX 独显直连）上运行 **macOS 26 Tahoe** 的 OpenCore EFI 配置仓库。
 | 3 | [docs/04-许可证与归属.md](docs/04-许可证与归属.md) | 改 kext / 发布前**必须**看 |
 | 4 | [docs/01-硬件与兼容性.md](docs/01-硬件与兼容性.md) | 哪些能用、哪些不能 |
 | 5 | [docs/06-参考文献.md](docs/06-参考文献.md) | 决策来源，避免重复踩坑 |
+| 6 | [docs/STYLE.md](docs/STYLE.md) | **改文档前必读**（排版规范） |
 
 ---
 
@@ -56,7 +57,7 @@ MUX 独显直连）上运行 **macOS 26 Tahoe** 的 OpenCore EFI 配置仓库。
 
 ### 🔴 R3 — 不要删这些 boot-args
 
-```
+```text
 amfi=0x80 amfi_get_out_of_my_way=0x1     ← NullMoth 驱动硬依赖
 nvfb=1 nvaccel=1 nvfbheads=4 gfxrst=4    ← NullMoth 驱动
 nvrmacpibl=1                             ← 内屏亮度
@@ -132,7 +133,7 @@ nvrmacpibl=1                             ← 内屏亮度
 | 操作 | 结果 |
 |---|---|
 | 单独按 **Fn** | ❌ 无反应 |
-| **Fn + F 功能区按键** | 🔴 **整机重启** |
+| Fn + F 功能区按键 | 🔴 **整机重启** |
 | 单独按 F1–F12 | ✅ 正常 |
 
 **这是已复现的真实缺陷，不是配置错误。** 遇到"Fn 键不好用"的反馈时：
@@ -260,11 +261,11 @@ grep -r "C0[0-9A-Z]\{9\}" EFI/OC/config.plist
 
 | 许可证 | 组件 | 约束 |
 |---|---|---|
-| **GPL-3.0-or-later** | `YYavicWiFi.kext` | 分发二进制**需提供对应源码**；含 MediaTek 固件（另有条款） |
-| **GPL-2.0** | `VoodooI2C*`、`VoodooPS2*`、`SimpleMtkBtFw` | 同上 |
+| GPL-3.0-or-later | `YYavicWiFi.kext` | 分发二进制**需提供对应源码**；含 MediaTek 固件（另有条款） |
+| GPL-2.0 | `VoodooI2C*`、`VoodooPS2*`、`SimpleMtkBtFw` | 同上 |
 | BSD-3-Clause | OpenCore、Lilu、VirtualSMC、WhateverGreen、RestrictEvents、NVMeFix、BrightnessKeys、BlueToolFixup、AMFIPass、USBToolBox、AppleMCEReporterDisabler | 保留版权声明即可 |
 | MIT | `ECEnabler` | 保留版权声明 |
-| **PolyForm Noncommercial** | NullMoth NVIDIA 驱动、`NullMothSafe.efi` | ⚠️ **仅限非商业用途**，**不得加入本仓库** |
+| PolyForm Noncommercial | NullMoth NVIDIA 驱动、`NullMothSafe.efi` | ⚠️ **仅限非商业用途**，**不得加入本仓库** |
 
 **AI 助手特别注意**：
 

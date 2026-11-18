@@ -5,7 +5,7 @@
 [![CPU](https://img.shields.io/badge/CPU-Ryzen%209%209955HX-E2231A?logo=amd&logoColor=white)](#)
 [![GPU](https://img.shields.io/badge/GPU-RTX%205060%20Laptop-76B900?logo=nvidia&logoColor=white)](#)
 
-一台 **AMD Ryzen 9 9955HX + NVIDIA RTX 5060 Laptop（MUX 独显直连）** 的机械革命蛟龙 16 Pro 潮玩版，
+一台 **AMD Ryzen 9 9955HX** + **NVIDIA RTX 5060 Laptop**（MUX 独显直连）的机械革命蛟龙 16 Pro 潮玩版，
 通过 [NullMoth 1401](https://github.com/nullmoth/1401) + [NullMoth NVIDIA 驱动](https://github.com/nullmoth/nvidia-macos-driver)
 跑上 **macOS 26 Tahoe** 的完整 OpenCore EFI。
 
@@ -35,15 +35,15 @@
 
 | 功能 | 状态 | 说明 |
 |---|---|---|
-| **内置硬盘引导** | ✅ | **无需 U 盘**，已改 BIOS `Hard Drive BBS Priorities`（见 docs/07） |
+| 内置硬盘引导 | ✅ | **无需 U 盘**，已改 BIOS `Hard Drive BBS Priorities`（见 [docs/07](docs/07-内置EFI引导修复.md)） |
 | 系统启动 | ✅ | macOS 26.7.3 (25G342)，正常进桌面 |
 | 显卡 / Metal | ✅ | RTX 5060 Laptop 8 GB，NullMoth 驱动，内屏正常点亮 |
 | 内建键盘 | ✅ | PS/2，VoodooPS2Controller |
 | 触控板 | ✅ | I2C HID，VoodooI2C + `-vi2c-force-polling` |
-| **Wi-Fi** | ✅ | **MT7922 原生驱动，YYavicWiFi 0.8.0 + `-yyavicnoverify`** |
-| **内置声卡** | ✅ | **VoodooHDA 3.7.1 BL 版**；扬声器 / 耳机孔 / 麦克风均可用（见 docs/08） |
+| Wi-Fi | ✅ | **MT7922 原生驱动，YYavicWiFi 0.8.0 + `-yyavicnoverify`** |
+| 内置声卡 | ✅ | **VoodooHDA 3.7.1 BL 版**；扬声器 / 耳机孔 / 麦克风均可用（见 [docs/08](docs/08-内置声卡修复.md)） |
 | 亮度调节 | ✅ | `nvrmacpibl=1`，**控制中心滑块可用** |
-| **Fn 键** | 🔴 | **单独按无反应；Fn + F 功能区按键会导致系统重启。未修复，见上方警告** |
+| Fn 键 | 🔴 | **单独按无反应；Fn + F 功能区按键会导致系统重启。未修复，见上方警告** |
 | USB | ✅ | USBToolBox + UTBDefault |
 | Windows 双启动 | ✅ | OC 菜单自动列出 Windows Boot Manager |
 | 睡眠 / 唤醒 | ⚠️ | 未系统验证 |
@@ -149,7 +149,7 @@
 
 ### boot-args
 
-```
+```text
 debug=0x100 keepsyms=1 -amfipassbeta -vi2c-force-polling revpatch=sbvmm
 nvfb=1 nvaccel=1 nvfbheads=4 -nvkmsnosmooth amfi_get_out_of_my_way=0x1
 amfi=0x80 ipc_control_port_options=0 gfxrst=4
@@ -162,7 +162,7 @@ nvrmacpibl=1 yyavic-cc=CN -yyavicnoverify
 | `nvrmacpibl=1` | **开启内屏亮度**（仅滑块，**Fn 键不可用**） |
 | `-vi2c-force-polling` | 触控板改轮询，绕开 GPIO 中断问题 |
 | `yyavic-cc=CN` | Wi-Fi 国家码（决定可用信道） |
-| `-yyavicnoverify` | **跳过 YYavicWiFi 的 macOS build 检查，见下方警告** |
+| `-yyavicnoverify` | 跳过 YYavicWiFi 的 build 检查，**见下方警告** |
 | `amfi=0x80 amfi_get_out_of_my_way=0x1` | **必需**，NullMoth 驱动依赖 |
 | `revpatch=sbvmm` | Tahoe 安全启动型号检查绕过 |
 | `debug=0x100` | 保留调试信息（不刷屏），排查用 |
@@ -234,7 +234,7 @@ nvrmacpibl=1 yyavic-cc=CN -yyavicnoverify
 
 ## 目录结构
 
-```
+```text
 EFI/
 ├── BOOT/
 │   └── BOOTx64.efi              ← 需从 OpenCorePkg 官方 release 获取
@@ -243,7 +243,7 @@ EFI/
     ├── config.plist             ★ 本仓库核心（已脱敏，需填入三码）
     ├── ACPI/                    7 个 SSDT（本仓库提供）
     ├── Drivers/                 5 个 UEFI 驱动（需从 OpenCorePkg 获取）
-    ├── Kexts/                   ⚠️ 空 —— 需自行下载（见 docs/03）
+    ├── Kexts/                   ⚠️ 空 —— 需自行下载（见 [docs/03](docs/03-Kext清单.md)）
     ├── Resources/               ⚠️ 不含 —— 开关机主题，可选
     └── Tools/                   ⚠️ 不含 —— OpenShell 等调试工具，可选
 ```
@@ -252,6 +252,23 @@ EFI/
 > [docs/03-Kext清单.md](docs/03-Kext清单.md) 列出的顺序逐条添加。
 
 各 kext 的版本、来源与许可证见 [docs/03-Kext清单.md](docs/03-Kext清单.md)。
+
+---
+
+## 文档索引
+
+| 文档 | 内容 | 什么时候看 |
+|---|---|---|
+| [docs/01-硬件与兼容性.md](docs/01-硬件与兼容性.md) | 硬件清单、兼容性总表、与同类机型对比 | 判断你的机器是否适用 |
+| [docs/02-关键配置与踩坑.md](docs/02-关键配置与踩坑.md) | **每个配置值的因果 + 已证伪清单** | 改配置之前**必读** |
+| [docs/03-Kext清单.md](docs/03-Kext清单.md) | 20 个 kext 的版本、来源、下载链接 | 准备 kext 时 |
+| [docs/04-许可证与归属.md](docs/04-许可证与归属.md) | 各组件许可证、分发注意事项 | 再分发之前 |
+| [docs/05-安装指南.md](docs/05-安装指南.md) | 从零安装步骤、常见问题 | 首次安装 |
+| [docs/06-参考文献.md](docs/06-参考文献.md) | 决策来源、同类项目、致谢 | 追溯"为什么这么做" |
+| [docs/07-内置EFI引导修复.md](docs/07-内置EFI引导修复.md) | 不插 U 盘从内置盘引导 | 装完系统后 |
+| [docs/08-内置声卡修复.md](docs/08-内置声卡修复.md) | macOS 26 无声的解决（VoodooHDA） | 没声音时 |
+| [docs/STYLE.md](docs/STYLE.md) | 文档排版规范 | 修改文档时 |
+| [AGENTS.md](AGENTS.md) | AI/自动化操作规范与 9 条红线 | 交给 agent 处理之前 |
 
 ---
 
@@ -269,7 +286,7 @@ EFI/
 - [Yusufcan Yavic](https://github.com/yusufcanyavic/YYavicWiFi) — MT7922 原生 Wi-Fi 驱动
 - [acidanthera](https://github.com/acidanthera) — OpenCore、Lilu、VirtualSMC、WhateverGreen 等
 - [laobamac](https://github.com/laobamac) — SimpleMtkWlan / SimpleMtkBtFw
-- **[VisualTechStudio](https://github.com/VisualTechStudio/ASUS-TX-Gaming-7Pro-Ryzen-CN-OpenCore-EFI) — 同配置（9955HX + RTX 5060）参考 EFI，本项目开机卡死的修复方案来源**
+- **[VisualTechStudio](https://github.com/VisualTechStudio/ASUS-TX-Gaming-7Pro-Ryzen-CN-OpenCore-EFI)** — 同配置（9955HX + RTX 5060）参考 EFI，本项目开机卡死的修复方案来源
 - [gqm321](https://github.com/gqm321/macos15-rtx5070-jiaolong) — 同机型（蛟龙 7845HX + RTX 5070）参考
 - [Dhinak G.](https://github.com/dhinakg) — AMFIPass、USBToolBox
 
