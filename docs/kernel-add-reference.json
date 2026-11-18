@@ -1,5 +1,5 @@
 {
-  "_comment": "此文件是 Kernel > Add 的完整条目清单，仅供使用者参考。仓库 config.plist 中该数组为空（纯配置版）。放入 kext 后按此顺序与字段添加。",
+  "_comment": "Kernel > Add 完整条目清单，仅供参考。仓库 config.plist 中该数组为空（纯配置版）。",
   "count": 27,
   "entries": [
     {

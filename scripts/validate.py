@@ -31,6 +31,10 @@ EXPECTED = {
     # 内置硬盘引导依赖：LauncherOption 必须 Disabled，否则 OC 会重写 BootOrder
     ("Misc", "Boot", "LauncherOption"): "Disabled",
     ("UEFI", "Quirks", "RequestBootVarRouting"): True,
+    # 静默启动：Target 只写文件(0x40)，AppleDebug 关闭（否则刷屏）
+    ("Misc", "Debug", "Target"): 0x40,
+    ("Misc", "Debug", "AppleDebug"): False,
+    ("Misc", "Debug", "ApplePanic"): True,
 }
 
 # boot-args 中必须存在的关键参数
@@ -154,6 +158,13 @@ def main():
     else:
         print(f"{WARN} NVRAM > Delete 不含 boot-args → 改参数可能不生效")
         warnings.append("NVRAM Delete 缺 boot-args")
+
+    # 静默启动检查：不应含 -v
+    if "-v" in ba.split():
+        print(f"{WARN} boot-args 含 -v → 每次开机会刷屏（排查模式）")
+        warnings.append("boot-args 含 -v（非静默启动）")
+    else:
+        print(f"{OK} boot-args 无 -v（静默启动）")
 
     # ---- 5. 条目数 ----
     print()

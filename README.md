@@ -150,7 +150,7 @@
 ### boot-args
 
 ```
--v debug=0x100 keepsyms=1 -amfipassbeta -vi2c-force-polling revpatch=sbvmm
+debug=0x100 keepsyms=1 -amfipassbeta -vi2c-force-polling revpatch=sbvmm
 nvfb=1 nvaccel=1 nvfbheads=4 -nvkmsnosmooth amfi_get_out_of_my_way=0x1
 amfi=0x80 ipc_control_port_options=0 gfxrst=4
 nvrmacpibl=1 yyavic-cc=CN -yyavicnoverify
@@ -165,6 +165,41 @@ nvrmacpibl=1 yyavic-cc=CN -yyavicnoverify
 | `-yyavicnoverify` | **跳过 YYavicWiFi 的 macOS build 检查，见下方警告** |
 | `amfi=0x80 amfi_get_out_of_my_way=0x1` | **必需**，NullMoth 驱动依赖 |
 | `revpatch=sbvmm` | Tahoe 安全启动型号检查绕过 |
+| `debug=0x100` | 保留调试信息（不刷屏），排查用 |
+| `keepsyms=1` | panic 时保留符号，**建议保留** |
+
+> ### 📋 关于 `-v`（已移除）
+>
+> **`-v` 已被刻意移除** —— 它会让每次开机都刷一屏内核日志。
+> 如果你在别处看到带 `-v` 的 OpenCore 配置，那是**调试模式**，日常使用不需要。
+>
+> **需要排查问题时**，把它临时加回 boot-args 即可：
+>
+> ```
+> -v
+> ```
+>
+> 同时建议临时把 `Misc → Debug → Target` 从 `0x40` 改成 `0x43`（加屏幕显示）。
+> **排查完记得改回来**，否则每次开机都会刷屏。
+
+> ### 📊 日志配置（静默模式）
+>
+> | 设置 | 值 | 含义 |
+> |---|---|---|
+> | `boot-args → -v` | **移除** | 不打印内核 verbose |
+> | `Misc → Debug → AppleDebug` | **False** | 不把 boot.efi 输出转发到屏幕 |
+> | `Misc → Debug → Target` | **`0x40`** | **只写文件**，不显示到屏幕 |
+> | `Misc → Debug → DisplayLevel` | `0x80000002` | 只记录 ERROR + WARN |
+> | `Misc → Debug → ApplePanic` | **True** | panic 仍会落盘 |
+>
+> **结果**：开机屏幕干净，但 `EFI` 分区根目录仍会生成 `opencore-*.txt` 日志文件。
+> 出问题时**依然能查**，只是不再刷屏。
+>
+> 💡 **日志文件会累积**。建议偶尔清理（每份约 256 KB，上限 128 KB 滚动）：
+> ```bash
+> # macOS，在 EFI 分区根目录
+> rm /Volumes/EFI/opencore-*.txt
+> ```
 
 > ⚠️ **`-yyavicnoverify` 有风险**：YYavicWiFi 0.8.0 的 macOS 26 原生层是针对
 > **26.7.2 (25G332)** 编译的，本机是 **26.7.3 (25G342)**。二者 IO80211/Skywalk 布局目前一致，
