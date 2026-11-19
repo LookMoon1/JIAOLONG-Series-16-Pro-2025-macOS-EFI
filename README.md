@@ -44,6 +44,7 @@
 | 内置声卡 | ✅ | **VoodooHDA 3.7.1 BL 版**；扬声器 / 耳机孔 / 麦克风均可用（见 [docs/08](docs/08-内置声卡修复.md)） |
 | 亮度调节 | ✅ | `nvrmacpibl=1`，**控制中心滑块可用** |
 | Fn 键 | 🔴 | **单独按无反应；Fn + F 功能区按键会导致系统重启。未修复，见上方警告** |
+| 性能面板 | ✅ | **自研只读 EC 驱动 + 面板 App + 桌面组件**（见 [panel/](panel/)） |
 | USB | ✅ | USBToolBox + UTBDefault |
 | Windows 双启动 | ✅ | OC 菜单自动列出 Windows Boot Manager |
 | 睡眠 / 唤醒 | ⚠️ | 未系统验证 |
@@ -274,14 +275,16 @@ EFI/
 |---|---|---|
 | [docs/01-硬件与兼容性.md](docs/01-硬件与兼容性.md) | 硬件清单、兼容性总表、与同类机型对比 | 判断你的机器是否适用 |
 | [docs/02-关键配置与踩坑.md](docs/02-关键配置与踩坑.md) | **每个配置值的因果 + 已证伪清单** | 改配置之前**必读** |
-| [docs/03-Kext清单.md](docs/03-Kext清单.md) | 20 个 kext 的版本、来源、下载链接 | 准备 kext 时 |
+| [docs/03-Kext清单.md](docs/03-Kext清单.md) | 21 个 kext 的版本、来源、下载链接 | 准备 kext 时 |
 | [docs/04-许可证与归属.md](docs/04-许可证与归属.md) | 各组件许可证、分发注意事项 | 再分发之前 |
 | [docs/05-安装指南.md](docs/05-安装指南.md) | 从零安装步骤、常见问题 | 首次安装 |
 | [docs/06-参考文献.md](docs/06-参考文献.md) | 决策来源、同类项目、致谢 | 追溯"为什么这么做" |
 | [docs/07-内置EFI引导修复.md](docs/07-内置EFI引导修复.md) | 不插 U 盘从内置盘引导 | 装完系统后 |
 | [docs/08-内置声卡修复.md](docs/08-内置声卡修复.md) | macOS 26 无声的解决（VoodooHDA） | 没声音时 |
+| [docs/09-EC驱动与性能面板.md](docs/09-EC驱动与性能面板.md) | 只读 EC 驱动、寄存器语义、事故记录 | 想了解性能面板时 |
+| [panel/](panel/) | 性能面板源码（kext + App + 桌面组件 + 工具） | 要编译或改面板时 |
 | [docs/STYLE.md](docs/STYLE.md) | 文档排版规范 | 修改文档时 |
-| [AGENTS.md](AGENTS.md) | AI/自动化操作规范与 9 条红线 | 交给 agent 处理之前 |
+| [AGENTS.md](AGENTS.md) | AI/自动化操作规范与 10 条红线 | 交给 agent 处理之前 |
 
 ---
 

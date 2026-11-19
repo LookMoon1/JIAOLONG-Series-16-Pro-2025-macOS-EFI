@@ -9,7 +9,7 @@
 > NullMoth 驱动是 PolyForm 非商业许可 —— 打包分发风险大、收益小，
 > 而这些都是上游现成且持续更新的。
 
-本 EFI 需要 **19 个 kext**（含 6 个 PlugIns）。
+本 EFI 需要 **21 个 kext**（`Kernel → Add` 共 28 条，含 7 个 PlugIns 条目）。
 
 ## 主 Kext（`Kernel → Add` 顺序即加载顺序）
 
@@ -39,6 +39,7 @@
 | 18 | `VoodooI2CHID.kext` | 1 | `com.alexandred.VoodooI2CHID` | I2C HID 设备支持 | VoodooI2C 包内 | GPL-2.0 |
 | 19 | `VoodooPS2Controller.kext` | 2.3.8 | `as.acidanthera.voodoo.driver.PS2Controller` | **内建键盘**（PS/2） | [acidanthera/VoodooPS2](https://github.com/acidanthera/VoodooPS2/releases) | GPL-2.0 |
 | 20 | `WhateverGreen.kext` | 1.7.2 | `as.vit9696.WhateverGreen` | 显卡补丁框架 | [acidanthera/WhateverGreen](https://github.com/acidanthera/WhateverGreen/releases) | BSD-3-Clause |
+| 21 | `MechrevoEC.kext` | v9 | `com.local.MechrevoEC` | **性能监控**（只读 EC 采样，见 [panel/](../panel/)） | **本仓库自研**（源码在 [panel/kext/](../panel/kext/)） | MIT |
 
 > ### 🔊 关于 `VoodooHDA_BL.kext` 的两个关键点
 >

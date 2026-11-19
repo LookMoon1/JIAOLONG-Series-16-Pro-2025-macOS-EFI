@@ -29,6 +29,7 @@ MUX 独显直连）上运行 **macOS 26 Tahoe** 的 OpenCore EFI 配置仓库。
 | 4 | [docs/01-硬件与兼容性.md](docs/01-硬件与兼容性.md) | 哪些能用、哪些不能 |
 | 5 | [docs/06-参考文献.md](docs/06-参考文献.md) | 决策来源，避免重复踩坑 |
 | 6 | [docs/STYLE.md](docs/STYLE.md) | **改文档前必读**（排版规范） |
+| 7 | [docs/09-EC驱动与性能面板.md](docs/09-EC驱动与性能面板.md) | 性能面板原理与事故记录（**R10 相关**） |
 
 ---
 
@@ -144,6 +145,29 @@ nvrmacpibl=1                             ← 内屏亮度
 - ✅ 正确说法：亮度**滑块**可用，Fn 键不可用且组合键会重启
 
 详见 [docs/02-关键配置与踩坑.md](docs/02-关键配置与踩坑.md) 第四节之二。
+
+### 🔴 R10 — 不要启用 `SSDT-MechrevoData.aml`
+
+| 项 | 状态 |
+|---|---|
+| `MechrevoEC.kext` | ✅ **已启用**（v9 只读采样，稳定） |
+| `SSDT-MechrevoData.aml` | ❌ **必须保持 `Enabled=False`**（文件在，不启用） |
+
+**原因**：2026-11-19 曾把该 SSDT 与改版驱动 v7 **同时启用**，
+导致 macOS **完全无法启动**，被迫进 Windows 修复。**元凶未定位**（无法确定是 SSDT、
+v7 驱动、还是两者组合）。
+
+**当前组合（v9 驱动 + SSDT 禁用）是稳定的，不要再改动。**
+
+其它禁令：
+
+- ❌ **不要**一次性启用多个未验证的 kext / SSDT —— 出问题无法二分定位
+- ❌ **不要**用 PowerShell 的 `[xml]` 改 `config.plist` —— 会把 `<true/>`
+  写成非法的 `<true>false</true>`，OpenCore 直接解析失败。**必须改原文文本**
+- ✅ 改完必须 `plutil -lint` 验证
+
+性能面板相关详见 [docs/09-EC驱动与性能面板.md](docs/09-EC驱动与性能面板.md)
+与 [panel/](panel/)。
 
 ---
 

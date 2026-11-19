@@ -14,3 +14,5 @@
 # 二进制文件：不做行尾转换
 *.efi       binary
 *.aml       binary
+# panel 里的 shell 脚本需要可执行位（macOS 上直接 ./build.sh）
+panel/**/*.sh text eol=lf
